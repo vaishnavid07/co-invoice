@@ -78,7 +78,7 @@ export function EditorSidebar({ mobileView }) {
                 href="https://github.com/sponsors/mraxays"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-background/40"
+                className="inline-block font-semibold text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-background/40"
                 style={{ color: accentHex, borderColor: accentHex }}
               >
                 <HeartHandshake className="inline-block mr-1" />

@@ -53,7 +53,7 @@ export function DesignControls() {
             href="https://github.com/mraxays/co-invoice"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-background/40"
+            className="inline-flex font-semibold items-center gap-2 text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-background/40"
             style={{ color: accentHex, borderColor: accentHex }}
           >
             <Github />
