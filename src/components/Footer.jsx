@@ -20,15 +20,15 @@ export function Footer() {
   return (
     <footer className="border-t border-border/50 bg-background/60 backdrop-blur px-6 py-4">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
           <span>© {new Date().getFullYear()}</span>
           <span
             className="font-medium"
             style={{ color: accentHex }}
           >
-            Co-Invoice
+            Co-Invoice.
           </span>
-          <span>. Open source invoice generator.</span>
+          <span> Open source invoice generator.</span>
         </div>
 
         <div className="flex items-center gap-5">
