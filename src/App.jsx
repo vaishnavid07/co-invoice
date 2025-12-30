@@ -6,6 +6,7 @@ import { PreviewCanvas } from "@/components/invoice/PreviewCanvas";
 import { PanelLeftClose, PanelLeftOpen, Printer } from "lucide-react";
 import { useReactToPrint } from "react-to-print";
 import useInvoiceStore from "@/store/useInvoiceStore";
+import { Footer } from "@/components/Footer";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
@@ -37,14 +38,10 @@ function App() {
       root.classList.remove("dark");
     }
   }, [design.darkMode]);
-
   if (isMobile) {
     return (
-      <div className="min-h-screen bg-background text-foreground font-sans">
-        <Tabs
-          defaultValue="edit"
-          className="h-full flex flex-col fixed inset-0"
-        >
+      <div className="min-h-screen flex flex-col bg-background text-foreground font-sans">
+        <Tabs defaultValue="edit" className="flex-1 flex flex-col">
           <TabsList className="grid w-full grid-cols-2 rounded-none p-0 h-14 border-b border-border bg-card z-50">
             <TabsTrigger
               value="edit"
@@ -77,54 +74,60 @@ function App() {
             <PreviewCanvas ref={contentRef} />
           </TabsContent>
         </Tabs>
+
+        {/* Footer */}
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="h-screen w-full bg-background text-foreground flex overflow-hidden font-sans transition-colors duration-300">
-      {/* Sidebar */}
-      <aside
-        className={`${
-          isSidebarOpen ? "w-[480px]" : "w-0"
-        } transition-all duration-300 ease-out relative flex-shrink-0 z-20 shadow-2xl shadow-black/5 bg-background border-r border-border overflow-hidden`}
-      >
-        <div className="h-full w-[480px]">
-          <EditorSidebar />
-        </div>
-      </aside>
+    <>
+      <div className="h-screen w-full bg-background text-foreground flex overflow-hidden font-sans transition-colors duration-300">
+        {/* Sidebar */}
+        <aside
+          className={`${
+            isSidebarOpen ? "w-[480px]" : "w-0"
+          } transition-all duration-300 ease-out relative flex-shrink-0 z-20 shadow-2xl shadow-black/5 bg-background border-r border-border overflow-hidden`}
+        >
+          <div className="h-full w-[480px]">
+            <EditorSidebar />
+          </div>
+        </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 h-full overflow-hidden relative z-10 flex flex-col bg-muted/20">
-        {/* Toggle Button */}
-        <div className="absolute top-6 left-6 z-50 flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full shadow-md bg-background/80 backdrop-blur-md hover:bg-background h-10 w-10 border-border/60"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            {isSidebarOpen ? (
-              <PanelLeftClose size={18} className="text-muted-foreground" />
-            ) : (
-              <PanelLeftOpen size={18} className="text-foreground" />
-            )}
-          </Button>
-        </div>
+        {/* Main Content */}
+        <main className="flex-1 h-full overflow-hidden relative z-10 flex flex-col bg-muted/20">
+          {/* Toggle Button */}
+          <div className="absolute top-6 left-6 z-50 flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full shadow-md bg-background/80 backdrop-blur-md hover:bg-background h-10 w-10 border-border/60"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              {isSidebarOpen ? (
+                <PanelLeftClose size={18} className="text-muted-foreground" />
+              ) : (
+                <PanelLeftOpen size={18} className="text-foreground" />
+              )}
+            </Button>
+          </div>
 
-        {/* Print Button */}
-        <div className="absolute top-6 right-8 z-50">
-          <Button
-            onClick={handlePrint}
-            className="shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 transition-all hover:scale-105 active:scale-95"
-          >
-            <Printer size={18} className="mr-2" /> Download / Print
-          </Button>
-        </div>
+          {/* Print Button */}
+          <div className="absolute top-6 right-8 z-50">
+            <Button
+              onClick={handlePrint}
+              className="shadow-lg bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 transition-all hover:scale-105 active:scale-95"
+            >
+              <Printer size={18} className="mr-2" /> Download / Print
+            </Button>
+          </div>
 
-        <PreviewCanvas ref={contentRef} />
-      </main>
-    </div>
+          <PreviewCanvas ref={contentRef} />
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
 

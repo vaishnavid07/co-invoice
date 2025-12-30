@@ -12,14 +12,9 @@ import {
   SelectSeparator,
   SelectGroup,
 } from "@/components/ui/select";
-
+import { Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FONTS } from "@/lib/fontConfig";
-// Use basic button for toggle if Switch not created, or create Switch.
-// I installed @radix-ui/react-switch. I haven't created the component file yet.
-// I'll use a simple button toggle for now to save a file, or create Switch inline?
-// "Switch" is standard in Shadcn. I should create it first?
-// Or just use a checkbox/button. I'll use a Button group for Light/Dark.
 
 const COLORS = [
   { name: "Blue", value: "blue-600", hex: "#2563eb" },
@@ -31,10 +26,43 @@ const COLORS = [
 
 export function DesignControls() {
   const { design, setDesignProperty } = useInvoiceStore();
-
+  const colorMap = {
+    "blue-600": "#2563eb",
+    "emerald-600": "#059669",
+    "rose-600": "#e11d48",
+    "amber-600": "#d97706",
+    "slate-600": "#475569",
+  };
+  const accentHex = design.accentColor.startsWith("#")
+    ? design.accentColor
+    : colorMap[design.accentColor] || "#2563eb";
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
+      <div className="relative overflow-hidden rounded-lg border border-border/60 bg-background/50 p-4">
+        <h3 className="font-semibold mb-1 text-sm uppercase tracking-wider">
+          Support the Project
+        </h3>
+
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          If you find Co-Invoice useful, consider starring the repository on
+          GitHub. It helps the project grow and reach more developers.
+        </p>
+
+        <div className="mt-3">
+          <a
+            href="https://github.com/mraxays/co-invoice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-md border transition-colors hover:bg-background/40"
+            style={{ color: accentHex, borderColor: accentHex }}
+          >
+            <Github />
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+
+      <div className="space-y-2 p-2 rounded-lg border border-border/50">
         <Label>Theme</Label>
         <div className="flex items-center gap-4 bg-background/50 p-2 rounded-lg border border-border/50">
           <div className="flex-1 text-sm text-muted-foreground">Dark Mode</div>
@@ -55,7 +83,7 @@ export function DesignControls() {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 p-2 rounded-lg border border-border/50">
         <Label>Accent Color</Label>
         <div className="flex flex-wrap gap-2 items-center">
           {COLORS.map((color) => (
@@ -93,7 +121,7 @@ export function DesignControls() {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 p-2 rounded-lg border border-border/50">
         <Label>Typography</Label>
         <Select
           value={design.fontStack}
@@ -133,19 +161,22 @@ export function DesignControls() {
         </Select>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 p-2 rounded-lg border border-border/50">
         <Label>Template Style</Label>
-        <Tabs
-          value={design.template}
-          onValueChange={(v) => setDesignProperty("template", v)}
-        >
-          <TabsList className="w-full grid grid-cols-4">
-            <TabsTrigger value="modern">Modern</TabsTrigger>
-            <TabsTrigger value="classic">Classic</TabsTrigger>
-            <TabsTrigger value="bold">Bold</TabsTrigger>
-            <TabsTrigger value="minimal">Minimal</TabsTrigger>
-          </TabsList>
-        </Tabs>
+
+        <div className="bg-background/50 ">
+          <Tabs
+            value={design.template}
+            onValueChange={(v) => setDesignProperty("template", v)}
+          >
+            <TabsList className="w-full grid grid-cols-4">
+              <TabsTrigger value="modern">Modern</TabsTrigger>
+              <TabsTrigger value="classic">Classic</TabsTrigger>
+              <TabsTrigger value="bold">Bold</TabsTrigger>
+              <TabsTrigger value="minimal">Minimal</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
       </div>
     </div>
   );
