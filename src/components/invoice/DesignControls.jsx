@@ -132,7 +132,7 @@ export function DesignControls() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Serif Fonts</SelectLabel>
+              <SelectLabel className="opacity-60 uppercase tracking-widest">Serif Fonts</SelectLabel>
               {FONTS.serif.map((font) => (
                 <SelectItem key={font.value} value={font.value}>
                   {font.name}
@@ -141,7 +141,7 @@ export function DesignControls() {
             </SelectGroup>
             <SelectSeparator />
             <SelectGroup>
-              <SelectLabel>Sans Serif Fonts</SelectLabel>
+              <SelectLabel className="opacity-60 uppercase tracking-widest">Sans Serif Fonts</SelectLabel>
               {FONTS.sans.map((font) => (
                 <SelectItem key={font.value} value={font.value}>
                   {font.name}
@@ -150,7 +150,7 @@ export function DesignControls() {
             </SelectGroup>
             <SelectSeparator />
             <SelectGroup>
-              <SelectLabel>Monospace Fonts</SelectLabel>
+              <SelectLabel className="opacity-60 uppercase tracking-widest">Monospace Fonts</SelectLabel>
               {FONTS.mono.map((font) => (
                 <SelectItem key={font.value} value={font.value}>
                   {font.name}
